@@ -9,5 +9,9 @@
     "debug": "node debug ."
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "data": "file:../data",
+    "dotenv": "^8.2.0"
+  }
 }
