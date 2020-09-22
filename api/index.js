@@ -1,9 +1,17 @@
 require('dotenv').config()
 
-const { env: { PORT: PORT_ENV, MONGODB_URL } } = process
+const { env: { PORT: PORT_ENV, MONGODB_URL, FILE_LOGGER_LEVEL, CONSOLE_LOGGER_LEVEL } } = process
 const PORT = PORT_ENV || 8080
 
 const path = require('path')
+
+const { Logger, singletonFileLogger, singletonConsoleLogger } = require('./logger')
+
+const file = singletonFileLogger(path.join(__dirname, 'server.log'))
+const console = singletonConsoleLogger()
+file.level = Logger[FILE_LOGGER_LEVEL]
+console.level = Logger[CONSOLE_LOGGER_LEVEL]
+
 
 const express = require('express')
 
@@ -14,7 +22,7 @@ console.debug('initializing server')
 
 try {
     console.debug('connecting to database')
-    debugger
+
     mongoose.connect(MONGODB_URL)
         .then(() => {
             const app = express()
