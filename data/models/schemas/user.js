@@ -1,15 +1,17 @@
-const { utils: { Email } } = require('commons')
+const { utils: { Email, Name } } = require('commons')
 const { Schema, SchemaTypes: { ObjectId } } = require('mongoose')
 
 module.exports = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        validate: [Name.validate, 'invalid name']
     },
 
     surname: {
         type: String,
-        required: true
+        required: true,
+        validate: [Name.validate, 'invalid surname']
     },
 
     email: {
