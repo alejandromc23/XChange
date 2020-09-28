@@ -9,5 +9,10 @@
     "test: coverage": "npx nyc --reporter=text --reporter=lcov npm test"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "commons": "file:../commons",
+    "data": "file:../data"
+  }
 }
