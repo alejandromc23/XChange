@@ -37,18 +37,6 @@ module.exports = new Schema({
         contentType: String
     },
 
-    location: {
-        type: {
-            type: String,
-            enum: ['Point'],
-            required: true
-        },
-        coordinates: {
-            type: [Number],
-            required: true
-        }
-    },
-
     conversations: [{
         type: ObjectId,
         required: true,

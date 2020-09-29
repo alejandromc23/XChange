@@ -7,8 +7,10 @@ const bcrypt = require('bcryptjs')
  */
 
 module.exports = (name, surname, email, password) => {
-
-    arguments.array.forEach(element => Field.validate(element));
+    Field.validate(name)
+    Field.validate(surname)
+    Field.validate(email)
+    Field.validate(password)
     Name.validate(name)
     Name.validate(surname)
     Email.validate(email)
@@ -20,6 +22,6 @@ module.exports = (name, surname, email, password) => {
 
         const hash = await bcrypt.hash(password, 10)
 
-        await User.create({ name, surname, email, username, password: hash })
+        await User.create({ name, surname, email, password: hash })
     })()
 }

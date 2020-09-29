@@ -1,6 +1,6 @@
 const Field = {
     isString(field) {
-        return typeof field === String
+        return typeof field === 'string'
     },
 
     isEmpty(field) {

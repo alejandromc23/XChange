@@ -4,7 +4,7 @@ const { Types: { ObjectId }, connect, disconnect } = mongoose
 
 module.exports = {
     connect(url) {
-        return connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+        return connect(url, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
     },
 
     disconnect,
