@@ -1,4 +1,5 @@
 module.exports = {
     Email: require('./email'),
-    Name: require('./name')
+    Name: require('./name'),
+    Field: require('./field')
 }

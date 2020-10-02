@@ -1,4 +1,4 @@
-const NAME_REGEX = /^[a-zA-Z]+(([a-zA-Z ])?[a-zA-Z]*)*$/g
+const NAME_REGEX = /^[a-zA-Z]+(([a-zA-Z ])?[a-zA-Z]*)*$/
 
 const Name = {
     isName(name) {
@@ -7,7 +7,7 @@ const Name = {
 }
 
 Name.validate = function (name) {
-    if (!this.isName) throw new Error(`${name} is not a name`)
+    if (!this.isName(name)) throw new Error(`${name} is not a name`)
 }.bind(Name)
 
 module.exports = Name
