@@ -12,6 +12,7 @@ const console = singletonConsoleLogger()
 file.level = Logger[FILE_LOGGER_LEVEL]
 console.level = Logger[CONSOLE_LOGGER_LEVEL]
 
+const { api } = require('./routes')
 
 const express = require('express')
 
@@ -26,6 +27,8 @@ try {
     mongoose.connect(MONGODB_URL)
         .then(() => {
             const app = express()
+
+            app.use('/api', api)
 
             app.get('*', (req, res) => {
                 res.status(404).send('Not found :(')
