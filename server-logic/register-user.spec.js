@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const { env: { TEST_MONGODB_URL: MONGODB_URL } } = process
+const { errors : { DuplicityError, VoidError, ValueError } } = require('commons')
 const registerUser = require('./register-user')
 const { random } = Math
 const { expect } = require('chai')
@@ -41,7 +42,7 @@ describe('server - register user', () => {
 
                 throw new Error('it should not reach this point')
             } catch (error) {
-                expect(error).to.be.an.instanceOf(Error)
+                expect(error).to.be.an.instanceOf(DuplicityError)
                 expect(error.message).to.equal(`user with e-mail ${email} already registered`)
             }
         })
@@ -51,19 +52,19 @@ describe('server - register user', () => {
         it('should fail if any field is blank or empty', () => {
             expect(() => {
                 registerUser('', surname, email, password)
-            }).to.throw(Error, 'fields cannot be blank or empty')
+            }).to.throw(VoidError, 'fields cannot be blank or empty')
 
             expect(() => {
                 registerUser(name, '', email, password)
-            }).to.throw(Error, 'fields cannot be blank or empty')
+            }).to.throw(VoidError, 'fields cannot be blank or empty')
 
             expect(() => {
                 registerUser(name, surname, '', password)
-            }).to.throw(Error, 'fields cannot be blank or empty')
+            }).to.throw(VoidError, 'fields cannot be blank or empty')
 
             expect(() => {
                 registerUser(name, surname, email, '')
-            }).to.throw(Error, 'fields cannot be blank or empty')
+            }).to.throw(VoidError, 'fields cannot be blank or empty')
         })
 
         it('should fail when fields are not strings', () => {
@@ -91,29 +92,29 @@ describe('server - register user', () => {
         it('should fail if name or surname are not real', () => {
             expect(() => {
                 registerUser('23 lebron', surname, email, password)
-            }).to.throw(Error, `23 lebron is not a name`)
+            }).to.throw(ValueError, `23 lebron is not a name`)
 
             expect(() => {
                 registerUser(name, '[]', email, password)
-            }).to.throw(Error, `[] is not a name`)
+            }).to.throw(ValueError, `[] is not a name`)
 
             expect(() => {
                 registerUser('lebron.james', surname, email, password)
-            }).to.throw(Error, `lebron.james is not a name`)
+            }).to.throw(ValueError, `lebron.james is not a name`)
 
             expect(() => {
                 registerUser(name, 'alex*el', email, password)
-            }).to.throw(Error, `alex*el is not a name`)
+            }).to.throw(ValueError, `alex*el is not a name`)
         })
 
         it('should fail if email is not real', () => {
             expect(() => {
                 registerUser(name, surname, 'email', password)
-            }).to.throw(Error, 'email is not an e-mail')
+            }).to.throw(ValueError, 'email is not an e-mail')
 
             expect(() => {
                 registerUser(name, surname, '234', password)
-            }).to.throw(Error, '234 is not an e-mail')
+            }).to.throw(ValueError, '234 is not an e-mail')
         })
 
         afterEach(() => User.deleteMany())

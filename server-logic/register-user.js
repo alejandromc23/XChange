@@ -1,6 +1,7 @@
 const { utils: { Email, Name, Field } } = require('commons')
 const { models: { User } } = require('data')
 const bcrypt = require('bcryptjs')
+const { errors : { DuplicityError } } = require('commons')
 
 /**
  * Register user into database
@@ -18,7 +19,7 @@ module.exports = (name, surname, email, password) => {
     return (async () => {
         const user = await User.findOne({ email })
 
-        if (user) throw new Error(`user with e-mail ${email} already registered`)
+        if (user) throw new DuplicityError(`user with e-mail ${email} already registered`)
 
         const hash = await bcrypt.hash(password, 10)
 
