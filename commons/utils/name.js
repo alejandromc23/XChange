@@ -1,3 +1,5 @@
+const { ValueError } = require('../errors')
+
 const NAME_REGEX = /^[a-zA-Z]+(([a-zA-Z ])?[a-zA-Z]*)*$/
 
 const Name = {
@@ -7,7 +9,7 @@ const Name = {
 }
 
 Name.validate = function (name) {
-    if (!this.isName(name)) throw new Error(`${name} is not a name`)
+    if (!this.isName(name)) throw new ValueError(`${name} is not a name`)
 }.bind(Name)
 
 module.exports = Name

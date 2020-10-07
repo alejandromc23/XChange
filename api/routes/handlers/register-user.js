@@ -1,4 +1,5 @@
 const { registerUser } = require('server-logic')
+const handleError = require('../../helpers')
 
 module.exports = (req, res) => {
     const { body : { name, surname, email, password } } = req
@@ -6,8 +7,8 @@ module.exports = (req, res) => {
     try {
         registerUser(name, surname, email, password)
             .then(() => res.status(201).send())
-            .catch(error => res.status(401).json( { error : error.message }))
+            .catch(handleError)
     } catch (error) {
-        console.error(error.message)
+        handleError(error)
     }
 }
