@@ -1,9 +1,11 @@
 .register
-    background-color: #FAEBD7
     padding: 10%
-    width: 100%
+    width: 80%
     height: 100%
 
+    &__title
+        text-align: center
+        font-size: 2rem
     &__form
         display: flex
         flex-direction: column
@@ -12,5 +14,13 @@
             margin: 3%
             padding: 9px 0 7px 8px
             border-radius: 0.5em
-            background-color: #FAFAFA
-            border-color: rgb(118, 118, 118)
+            border: none
+            border-bottom: 2px solid #87CEFA
+            font-size: 1rem
+
+        &-input:focus
+            outline: none
+            border-bottom-color: #00FA9A
+
+        &-input[type="text"]
+            font-size: 1rem
