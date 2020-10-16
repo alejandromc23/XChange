@@ -10,13 +10,15 @@ function App({ history }) {
 
   const handleGoToRegister = () => history.push('/register')
 
+  const handleGoToLogin = () => history.push('/login')
+
   return (
     <div className="app">
 
       <Container>
         <Route exact path='/' render={() => <Landing onGoToRegister = {handleGoToRegister}/>} />
         <Route path='/login' render={() => <Login />} />
-        <Route path='/register' render={() => <RegisterUser />} />
+        <Route path='/register' render={() => <RegisterUser onRegister={handleGoToLogin}/>} />
       </Container>
     </div>
   );
